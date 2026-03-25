@@ -1,0 +1,39 @@
+{
+  "name": "mitti-creation-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Mitti Creation e-commerce platform",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "nodemailer": "^6.9.4",
+    "razorpay": "^2.9.2",
+    "express-rate-limit": "^6.10.0",
+    "express-validator": "^7.0.1",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "ecommerce",
+    "mern",
+    "express",
+    "mongodb",
+    "razorpay"
+  ],
+  "author": "Mitti Creation",
+  "license": "MIT"
+}
