@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -42,24 +42,24 @@ api.interceptors.response.use(
 // Auth API
 export const authAPI = {
     register: (userData: { name: string; email: string; password: string }) =>
-        api.post('/auth/register', userData),
+        api.post('/api/auth/register', userData),
 
     login: (credentials: { email: string; password: string }) =>
-        api.post('/auth/login', credentials),
+        api.post('/api/auth/login', credentials),
 
-    getMe: () => api.get('/auth/me'),
+    getMe: () => api.get('/api/auth/me'),
 
     verifyEmail: (token: string) =>
-        api.post('/auth/verify-email', { token }),
+        api.post('/api/auth/verify-email', { token }),
 
     forgotPassword: (email: string) =>
-        api.post('/auth/forgot-password', { email }),
+        api.post('/api/auth/forgot-password', { email }),
 
     resetPassword: (token: string, password: string) =>
-        api.post('/auth/reset-password', { token, password }),
+        api.post('/api/auth/reset-password', { token, password }),
 
     updatePassword: (currentPassword: string, newPassword: string) =>
-        api.put('/auth/update-password', { currentPassword, newPassword }),
+        api.put('/api/auth/update-password', { currentPassword, newPassword }),
 };
 
 // Products API
@@ -71,32 +71,32 @@ export const productsAPI = {
         order?: string;
         page?: number;
         limit?: number;
-    }) => api.get('/products', { params }),
+    }) => api.get('/api/products', { params }),
 
-    getById: (id: string) => api.get(`/products/${id}`),
+    getById: (id: string) => api.get(`/api/products/${id}`),
 
-    getCategories: () => api.get('/products/categories'),
+    getCategories: () => api.get('/api/products/categories'),
 
-    create: (productData: any) => api.post('/products', productData),
+    create: (productData: any) => api.post('/api/products', productData),
 
-    update: (id: string, productData: any) => api.put(`/products/${id}`, productData),
+    update: (id: string, productData: any) => api.put(`/api/products/${id}`, productData),
 
-    delete: (id: string) => api.delete(`/products/${id}`),
+    delete: (id: string) => api.delete(`/api/products/${id}`),
 };
 
 // Cart API
 export const cartAPI = {
-    get: () => api.get('/cart'),
+    get: () => api.get('/api/cart'),
 
     add: (productId: string, quantity: number) =>
-        api.post('/cart/add', { productId, quantity }),
+        api.post('/api/cart/add', { productId, quantity }),
 
     update: (productId: string, quantity: number) =>
-        api.put('/cart/update', { productId, quantity }),
+        api.put('/api/cart/update', { productId, quantity }),
 
-    remove: (productId: string) => api.delete(`/cart/remove/${productId}`),
+    remove: (productId: string) => api.delete(`/api/cart/remove/${productId}`),
 
-    clear: () => api.delete('/cart/clear'),
+    clear: () => api.delete('/api/cart/clear'),
 };
 
 // Orders API
@@ -105,24 +105,24 @@ export const ordersAPI = {
         page?: number;
         limit?: number;
         status?: string;
-    }) => api.get('/orders', { params }),
+    }) => api.get('/api/orders', { params }),
 
-    getById: (id: string) => api.get(`/orders/${id}`),
+    getById: (id: string) => api.get(`/api/orders/${id}`),
 
     createRazorpayOrder: (shippingAddress: any) =>
-        api.post('/orders/create-razorpay-order', { shippingAddress }),
+        api.post('/api/orders/create-razorpay-order', { shippingAddress }),
 
     verifyPayment: (paymentData: {
         orderId: string;
         razorpayOrderId: string;
         razorpayPaymentId: string;
         razorpaySignature: string;
-    }) => api.post('/orders/verify-payment', paymentData),
+    }) => api.post('/api/orders/verify-payment', paymentData),
 
     createCOD: (shippingAddress: any) =>
-        api.post('/orders/cod', { shippingAddress }),
+        api.post('/api/orders/cod', { shippingAddress }),
 
-    cancel: (id: string) => api.put(`/orders/${id}/cancel`),
+    cancel: (id: string) => api.put(`/api/orders/${id}/cancel`),
 
     // Admin APIs
     getAllAdmin: (params?: {
@@ -130,19 +130,19 @@ export const ordersAPI = {
         limit?: number;
         status?: string;
         paymentStatus?: string;
-    }) => api.get('/orders/admin/all', { params }),
+    }) => api.get('/api/orders/admin/all', { params }),
 
     updateStatus: (id: string, statusData: {
         orderStatus?: string;
         paymentStatus?: string;
-    }) => api.put(`/orders/${id}/status`, statusData),
+    }) => api.put(`/api/orders/${id}/status`, statusData),
 };
 
 // Utility API
 export const utilityAPI = {
-    getHealth: () => api.get('/health'),
+    getHealth: () => api.get('/api/health'),
 
-    getDemoCredentials: () => api.get('/demo-credentials'),
+    getDemoCredentials: () => api.get('/api/demo-credentials'),
 };
 
 export default api;
