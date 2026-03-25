@@ -57,7 +57,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Golden Diya',
                 tagline: 'Handcrafted brass elegance',
                 price: 499,
-                image: 'https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/golden-diya.jpg',
                 description: 'Traditional brass diya with intricate patterns, perfect for your festive celebrations.',
                 stock: 100,
                 category: 'diyas'
@@ -66,7 +66,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Ceramic Lantern',
                 tagline: 'Modern minimalist design',
                 price: 899,
-                image: 'https://images.pexels.com/photos/6517632/pexels-photo-6517632.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/ceramic-lantern.png',
                 description: 'Contemporary ceramic lantern that blends tradition with modern aesthetics.',
                 stock: 100,
                 category: 'lanterns'
@@ -75,7 +75,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Crystal Candle Set',
                 tagline: 'Luxury in light',
                 price: 1299,
-                image: 'https://images.pexels.com/photos/1652109/pexels-photo-1652109.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/crystal-candle.jpg',
                 description: 'Premium crystal candle holders that create mesmerizing light patterns.',
                 stock: 100,
                 category: 'candles'
@@ -84,7 +84,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Floating Diyas',
                 tagline: 'Grace on water',
                 price: 699,
-                image: 'https://images.pexels.com/photos/1267699/pexels-photo-1267699.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/floating-diyas.jpg',
                 description: 'Set of floating diyas for a serene and spiritual ambiance.',
                 stock: 100,
                 category: 'diyas'
@@ -93,7 +93,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Hanging Lanterns',
                 tagline: 'Illuminate from above',
                 price: 1499,
-                image: 'https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/hanging-lanterns.jpg',
                 description: 'Decorative hanging lanterns with intricate metalwork and warm glow.',
                 stock: 100,
                 category: 'lanterns'
@@ -102,7 +102,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Silver Diya Collection',
                 tagline: 'Timeless tradition',
                 price: 799,
-                image: 'https://images.pexels.com/photos/1723637/pexels-photo-1723637.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/silver-diya.jpg',
                 description: 'Set of silver-plated diyas for an elegant festive display.',
                 stock: 100,
                 category: 'diyas'
@@ -111,7 +111,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Lotus Candle Holder',
                 tagline: 'Symbol of purity',
                 price: 599,
-                image: 'https://images.pexels.com/photos/3408344/pexels-photo-3408344.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/lotus-candle.jpg',
                 description: 'Lotus-shaped candle holder representing spiritual enlightenment.',
                 stock: 100,
                 category: 'candles'
@@ -120,7 +120,7 @@ productSchema.statics.createInitialProducts = async function () {
                 name: 'Copper Lantern Set',
                 tagline: 'Warm metallic charm',
                 price: 1099,
-                image: 'https://images.pexels.com/photos/1303081/pexels-photo-1303081.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: '/images/copper-lantern.jpg',
                 description: 'Artisan copper lanterns with traditional craftsmanship.',
                 stock: 100,
                 category: 'lanterns'
@@ -129,6 +129,26 @@ productSchema.statics.createInitialProducts = async function () {
 
         await this.insertMany(initialProducts);
         console.log('✅ Initial products created');
+    } else {
+        // Update existing products with new image paths
+        const imageUpdates = {
+            'Golden Diya': '/images/golden-diya.jpg',
+            'Ceramic Lantern': '/images/ceramic-lantern.jpg',
+            'Crystal Candle Set': '/images/crystal-candle.jpg',
+            'Floating Diyas': '/images/floating-diyas.jpg',
+            'Hanging Lanterns': '/images/hanging-lanterns.jpg',
+            'Silver Diya Collection': '/images/silver-diya.jpg',
+            'Lotus Candle Holder': '/images/lotus-candle.jpg',
+            'Copper Lantern Set': '/images/copper-lantern.jpg'
+        };
+
+        for (const [productName, newImage] of Object.entries(imageUpdates)) {
+            await this.updateOne(
+                { name: productName },
+                { $set: { image: newImage } }
+            );
+        }
+        console.log('✅ Product images updated');
     }
 };
 

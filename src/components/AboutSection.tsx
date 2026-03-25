@@ -64,7 +64,7 @@ const AboutSection = () => {
                 }}
               />
               <img
-                src="https://images.pexels.com/photos/3408267/pexels-photo-3408267.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                src="https://media.istockphoto.com/id/639487044/photo/hands-of-a-potter-creating-an-earthen-jar.jpg?s=612x612&w=0&k=20&c=gCVqR1YvUT6qZhazjpNNGzlpgh_sQQJNzXNsh0ZZEh0="
                 alt="Mitti Creation Craftsmanship"
                 className="w-full h-[600px] object-cover rounded-3xl"
               />
